@@ -24,6 +24,7 @@ wZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
                     <th>Descripción</th>
                     <th>Ruta</th>
                     <th>Fecha de creación</th>
+                    <th>etiqueta</th>
                 </tr>
             </thead>
             <tbody>
@@ -43,6 +44,17 @@ wZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
                         </td>
                         <td>
                             <%= foto.createdAt.toLocaleDateString('en-US') %>
+                        </td>
+                        <td>
+                            <% if (foto.etiqueta && foto.etiqueta.length> 0) { %>
+                                <% foto.etiqueta.forEach((etq, i)=> { %>
+                                    <span class="badge bg-primary">
+                                        <%= etq.texto %>
+                                    </span>
+                                    <% }); %>
+                                        <% } else { %>
+                                            <em>Sin etiquetas</em>
+                                            <% } %>
                         </td>
                     </tr>
                     <% }); %>
