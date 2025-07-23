@@ -16,6 +16,20 @@ wZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
         <h1 class="pb-4">
             <%= title %>
         </h1>
+
+        <form class="needs-validation" novalidate action='/fotos/findById/view' method="get">
+            <h1 class="pb-4">Filter by ID</h1>
+            <div>
+                <input type="number" class="form-control" id="id" name="id" placeholder="Enter ID"
+                    value="0" required>
+                <div class="invalid-feedback">
+                    Please enter a valid ID.
+                </div>
+            </div>
+            <br>
+            <button class="btn btn-primary" type="submit">Filter</button>
+        </form>
+
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
