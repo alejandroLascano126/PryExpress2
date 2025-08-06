@@ -6,8 +6,11 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+//var fotosRouter = require('./routes/fotos');
+//var fotosRestRouter = require('./routes/rest/fotos');
+const fotosRouter = require('./routes/rest/fotos');
+const proyectosRouter = require('./routes/rest/proyectos');
 
-var fotosRouter = require('./routes/fotos');
 
 var app = express();
 
@@ -21,15 +24,19 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/fotos', fotosRouter)
+//app.use('/fotos', fotosRestRouter)
+//app.use('/fotos', fotosRouter)
+app.use('/rest/proyectos', proyectosRouter);
+app.use('/rest/fotos', fotosRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
-
+  
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development

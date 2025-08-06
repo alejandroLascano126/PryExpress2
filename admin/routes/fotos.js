@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+const { Op } = require('sequelize');
+
 
 
 const Sequelize = require('sequelize');
@@ -43,6 +45,9 @@ router.get('/findById/json',
             .catch(error =>
                 res.status(400).send(error))
     });
+
+
+
 
 router.get('/findAll/view', function (req, res, next) {
 
@@ -97,4 +102,25 @@ router.get('/findById/view', function (req, res, next) {
     }
 });
 
+router.get('/findById/json',
+    function (req, res, next) {
+
+        Foto.findAll({
+            attributes: { exclude: ["updatedAt"] },
+            include: [{
+                model: Etiqueta,
+                attributes: ['texto'],
+                through: { attributes: [] }
+            }]
+        })
+            .then(fotos => {
+                res.json(fotos);
+            })
+            .catch(error =>
+                res.status(400).send(error))
+    });
+
+
 module.exports = router;
+
+
